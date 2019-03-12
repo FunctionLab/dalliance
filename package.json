@@ -48,8 +48,6 @@
   "main": "lib/module-exports.js",
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker",
-    "test": "echo 'Error: no test specified' && exit 1",
     "build": "gulp",
-    "build-browser": "npm run build",
   }
 }
