@@ -49,6 +49,6 @@
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker",
     "build": "gulp",
-    "postinstall": "gulp"
+    "install": "gulp"
   }
 }
