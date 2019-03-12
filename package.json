@@ -48,6 +48,6 @@
   "main": "lib/module-exports.js",
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker",
-    "install": "gulp -f ./gulpfile.js"
+    "postinstall": "gulp -f ./gulpfile.js"
   }
 }
