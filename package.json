@@ -1,6 +1,6 @@
 {
   "name": "@humanbase/dalliance",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Fast, embeddable genome visualization",
   "homepage": "https://www.biodalliance.org/",
   "license": "BSD-2-Clause",
@@ -39,7 +39,7 @@
   },
   "main": "build/dalliance-all.js",
   "files": [
-      "build"
+    "build"
   ],
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker"
