@@ -39,13 +39,14 @@
   },
   "files": [
     "lib",
+    "build",
     "css",
     "fonts",
     "help",
     "img",
     "build/worker-all.js"
   ],
-  "main": "build/dalliance-module.js",
+  "main": "build/dalliance-all.js",
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker"
   }
