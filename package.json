@@ -37,15 +37,6 @@
     "vinyl-source-stream": "1.1.0",
     "watchify": "~3.6.1"
   },
-  "files": [
-    "lib",
-    "build",
-    "css",
-    "fonts",
-    "help",
-    "img",
-    "build/worker-all.js"
-  ],
   "main": "build/dalliance-all.js",
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker"
