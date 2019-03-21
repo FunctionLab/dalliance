@@ -46,6 +46,24 @@ gulp.task('build-main', function() {
         .pipe(gulp.dest('build/'));
 });
 
+
+gulp.task('build-module', function() {
+    browserify({
+        entries: 'js/module-exports.js',
+        extensions: ['.js', '.es6'],
+        debug: true,
+        nobuiltins: true
+    })
+        .transform("babelify", {presets: ["es2015"],
+                                extensions: [".js", ".es6"]})
+        .bundle()
+        .pipe(source('dalliance-module.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('build/'));
+});
+
+
 gulp.task('compile-worker', function() {
     browserify({
         entries: 'js/fetchworker.js',
@@ -82,12 +100,30 @@ gulp.task('compile-main', function() {
         .pipe(gulp.dest('build/'));
 });
 
+gulp.task('compile-module', function() {
+    browserify({
+        entries: 'js/module-exports.js',
+        extensions: ['.js', '.es6'],
+        debug: true,
+        nobuiltins: true
+    })
+        .transform("babelify", {presets: ["es2015"],
+                                extensions: [".js", ".es6"]})
+        .bundle()
+        .pipe(source('dalliance-module.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('build/'));
+});
+
 gulp.task('watch', function() {
   gulp.watch('js/*.js', ['default']);
 });
 
-gulp.task('default', ['build-main', 'build-worker']);
-gulp.task('compile', ['compile-main', 'compile-worker']);
+gulp.task('default', ['build-main', 'build-worker', 'build-module']);
+gulp.task('compile', ['compile-main', 'compile-worker', 'compile-module']);
 
 gulp.task('lint-es6', function() {
     return gulp.src('js/*.es6')

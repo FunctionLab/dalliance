@@ -45,7 +45,7 @@
     "img",
     "build/worker-all.js"
   ],
-  "main": "lib/module-exports.js",
+  "main": "build/module-exports.js",
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker"
   }
