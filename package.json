@@ -38,6 +38,9 @@
     "watchify": "~3.6.1"
   },
   "main": "build/dalliance-all.js",
+  "files": [
+      "build"
+  ],
   "scripts": {
     "compile": "babel js -d lib && gulp compile-worker"
   }
