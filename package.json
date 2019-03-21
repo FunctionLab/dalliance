@@ -1,5 +1,5 @@
 {
-  "name": "humanbase-dalliance",
+  "name": "@humanbase/dalliance",
   "version": "0.0.1",
   "description": "Fast, embeddable genome visualization",
   "homepage": "https://www.biodalliance.org/",
