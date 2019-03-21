@@ -1,12 +1,12 @@
 {
-  "name": "dalliance",
+  "name": "hb-dalliance",
   "version": "0.13.90-alpha.7",
   "description": "Fast, embeddable genome visualization",
   "homepage": "https://www.biodalliance.org/",
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "git@github.com:dasmoth/dalliance.git"
+    "url": "git@github.com:aaronkw/dalliance.git"
   },
   "dependencies": {
     "es6-promise": "~3.0.2",
