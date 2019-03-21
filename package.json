@@ -1,6 +1,6 @@
 {
-  "name": "hb-dalliance",
-  "version": "0.13.91-alpha.7",
+  "name": "humanbase-dalliance",
+  "version": "0.0.1",
   "description": "Fast, embeddable genome visualization",
   "homepage": "https://www.biodalliance.org/",
   "license": "BSD-2-Clause",
