@@ -1,6 +1,6 @@
 /* -*- mode: javascript; c-basic-offset: 4; indent-tabs-mode: nil -*- */
 
-// 
+//
 // Dalliance Genome Explorer
 // (c) Thomas Down 2006-2013
 //
@@ -37,7 +37,7 @@ function TrackHubTrack() {
 TrackHubTrack.prototype.get = function(k) {
     if (this[k])
         return this[k];
-    else if (this._parent) 
+    else if (this._parent)
         return this._parent.get(k);
 }
 
@@ -49,13 +49,13 @@ TrackHubDB.prototype.getTracks = function(callback) {
     var thisB = this;
     if (this._tracks) {
         return callback(this._tracks);
-    } 
-    
+    }
+
     textXHR(this.absURL, function(trackFile, err) {
         if (err) {
             return callback(null, err);
         }
-        
+
         // trackFile = trackFile.replace(/\#.*/g, '');
         trackFile = trackFile.replace('\\\n', ' ');
 
@@ -98,7 +98,7 @@ TrackHubDB.prototype.getTracks = function(callback) {
                 // console.log('skipping ', track);
             }
         }
-        
+
         var toplevels = [];
         var composites = [];
         for (var ti = 0; ti < tracks.length; ++ti) {
@@ -119,7 +119,7 @@ TrackHubDB.prototype.getTracks = function(callback) {
                 } else {
                     console.log("Couldn't find parent " + ptoks[0] + '(' + track.parent + ')');
                 }
-               
+
             }
             if (track.compositeTrack) {
                 composites.push(track);
@@ -145,7 +145,7 @@ TrackHubDB.prototype.getTracks = function(callback) {
             if (!parentOfViews)
                 toplevels.push(comp);
         }
-            
+
         thisB._tracks = toplevels;
         return callback(thisB._tracks, null);
     }, {credentials: this.credentials, salt: true});
@@ -168,8 +168,8 @@ function connectTrackHub(hubURL, callback, opts) {
         for (var l = 0; l < toks.length - 2; l += 3) {
             hub[toks[l+1]] = toks[l+2];
         }
-        
-        
+
+
         if (hub.genomesFile) {
             var genURL = relativeURL(hubURL, hub.genomesFile);
             textXHR(genURL, function(genFile, err) {
@@ -200,7 +200,7 @@ function connectTrackHub(hubURL, callback, opts) {
                 }
 
                 callback(hub);
-                        
+
             }, opts);
         } else {
             callback(null, 'No genomesFile');
@@ -251,7 +251,7 @@ TrackHubTrack.prototype.toDallianceSource = function() {
                 }
             }
         }
-        return source;       
+        return source;
     } else {
         var type = this.type;
         if (!type) {
@@ -280,7 +280,8 @@ TrackHubTrack.prototype.toDallianceSource = function() {
             source.bwgURI = relativeURL(this._db.absURL, this.bigDataUrl);
             source.style = this.bigwigStyles();
             source.noDownsample = true;     // FIXME seems like a blunt instrument...
-            
+            source.forceReduction = -1;
+
             if (this.yLineOnOff && this.yLineOnOff == 'on') {
                 source.quantLeapThreshold = this.yLineMark !== undefined ? (1.0 * this.yLineMark) : 0.0;
             }
@@ -338,12 +339,12 @@ TrackHubTrack.prototype.bigwigStyles = function() {
             console.log('maxHeightPixels should be of the form max:default:min');
         }
     }
-    
+
     var gtype = 'bars';
     if (this.graphTypeDefault) {
         gtype = this.graphTypeDefault;
     }
-    
+
     var color = 'black';
     var altColor = null;
     if (this.color) {
@@ -352,7 +353,7 @@ TrackHubTrack.prototype.bigwigStyles = function() {
     if (this.altColor) {
         altColor = 'rgb(' + this.altColor + ')';
     }
-    
+
     var stylesheet = new DASStylesheet();
     var wigStyle = new DASStyle();
     if (gtype == 'points') {
@@ -382,9 +383,9 @@ TrackHubTrack.prototype.bigbedStyles = function() {
     var color = this.get('color');
     if (color)
         color = 'rgb(' + color + ')';
-    else 
+    else
         color = 'blue';
-    
+
     var stylesheet = new DASStylesheet();
     var wigStyle = new DASStyle();
     wigStyle.glyph = 'BOX';
@@ -400,7 +401,7 @@ TrackHubTrack.prototype.bigbedStyles = function() {
     var cbs = this.get('colorByStrand');
     if (cbs) {
         var cbsToks = cbs.split(/\s+/);
-        
+
         var plus = shallowCopy(wigStyle);
         plus.BGCOLOR = 'rgb(' + cbsToks[0] + ')';
         stylesheet.pushStyle({type: 'bigbed', orientation: '+'}, null, plus);
@@ -410,8 +411,8 @@ TrackHubTrack.prototype.bigbedStyles = function() {
         stylesheet.pushStyle({type: 'bigbed', orientation: '-'}, null, minus);
     } else {
         stylesheet.pushStyle({type: 'bigbed'}, null, wigStyle);
-    }   
-    
+    }
+
     var tlStyle = new DASStyle();
     tlStyle.glyph = 'BOX';
     tlStyle.FGCOLOR = 'black';
@@ -422,7 +423,7 @@ TrackHubTrack.prototype.bigbedStyles = function() {
     tlStyle.BUMP = true;
     tlStyle.ZINDEX = 20;
     stylesheet.pushStyle({type: 'translation'}, null, tlStyle);
-    
+
     var tsStyle = new DASStyle();
     tsStyle.glyph = 'BOX';
     tsStyle.FGCOLOR = 'black';
